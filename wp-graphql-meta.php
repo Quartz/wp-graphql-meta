@@ -12,7 +12,7 @@ namespace WPGraphQL\Extensions\Meta;
  * Get a collection of registered post types and taxonomies
  * then run them through the GraphQL fields filter.
  */
-add_action( 'graphql_init', function() {
+add_action( 'do_graphql_request', function() {
 	/**
 	 * Gather a summary of post types and taxonomies with their registration
 	 * details. This allows us to inspect for graphql_single_name. The user model
