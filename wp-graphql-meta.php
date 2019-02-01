@@ -58,8 +58,10 @@ function add_meta_fields( $fields, $object_type ) {
 		foreach ( $meta_keys as $key => $field_args ) {
 			$field_name = apply_filters( 'graphql_meta_field_name', $key, $object_type );
 
+			// Don't overwrite field resolvers. In batch queries, the type fields
+			// could be called multiple times, so just skip it gracefully.
 			if ( isset( $fields[ $field_name ] ) ) {
-				throw new \Exception( sprintf( 'Post meta key "%s" is a reserved word.', $key ) );
+				continue;
 			}
 
 			if ( ! $field_args['show_in_rest'] ) {
